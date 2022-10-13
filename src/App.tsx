@@ -3,7 +3,9 @@ import Button from "./components/Button";
 function App() {
   return (
     <div className="App">
-      <Button />
+      <Button variant="secondary" />
+      <Button variant="secondary" />
+      <Button variant="secondary" disable />
     </div>
   );
 }

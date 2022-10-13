@@ -1,8 +1,17 @@
 import { ButtonStyled } from "./styled";
 
-const Button = () => {
+export type ButtonProps = {
+  disable?: boolean;
+  variant: "primary" | "secondary";
+};
+
+const Button: React.FC<ButtonProps> = (props) => {
   return (
-    <ButtonStyled type="button" mainColor="#4643c6">
+    <ButtonStyled
+      type="button"
+      {...props}
+      /* variant={props.variant} disable={props.disable} */
+    >
       Aceleradora
     </ButtonStyled>
   );
