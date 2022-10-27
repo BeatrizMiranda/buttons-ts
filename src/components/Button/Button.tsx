@@ -1,8 +1,9 @@
+import React from "react";
 import { ButtonStyled } from "./styled";
 
 export type ButtonProps = {
   disable?: boolean;
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
