@@ -1,5 +1,4 @@
 import React from "react";
-import { ButtonStyled } from "./components/Button/styled";
 import { ButtonLoading } from "./components/ButtonLoading";
 import { ButtonEntrar } from "./components/ButtonEntrar/ButtonEntrar";
 import { AppStyled } from "./styles";
@@ -18,7 +17,7 @@ function App() {
       <Button disable />
       <br />
       <br />
-      <ButtonLoading />
+      <Button variant="primary" isLoading />
       <br />
       <br />
       <ButtonEntrar />
