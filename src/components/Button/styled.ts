@@ -1,19 +1,56 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { ButtonProps } from "./Button";
+
+const colors = {
+  primary: {
+    main: "#4643c6",
+    secondary: "#FFFFFF",
+  },
+  secondary: {
+    main: "#FFFFFF",
+    secondary: "#4643c6",
+  },
+};
+
+const gira = keyframes`
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+`;
 
 export const ButtonStyled = styled.button<ButtonProps>`
   font-weight: 600;
   padding: 10px 44px;
-  background-color: ${({ variant }) =>
-    variant === "primary" ? "#4643c6" : "#FFFFFF"};
   border-radius: 5px;
-  color: ${({ variant }) => (variant === "primary" ? "#FFFFFF" : "#4643c6")};
-  border: ${({ variant }) =>
-    variant === "primary" ? "2px solid #4643c6" : "2px solid #FFFFFF"};
 
-  cursor: pointer;
+  transition: all 500ms;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
+  position: relative;
+  cursor: pointer;
+
+  img {
+    display: none;
+  }
+
+  ${({ variant = "primary" }) => {
+    const { main, secondary } = colors[variant];
+    return `
+      background-color: ${main};
+      color: ${secondary};
+      border: 2px solid ${main};
+      
+      &:hover,
+      &:focus {
+        background-color: ${secondary};
+        color: ${main};
+        border: 2px solid ${main};
+      }
+    `;
+  }}
 
   ${({ disable }) =>
     disable &&
@@ -30,23 +67,18 @@ export const ButtonStyled = styled.button<ButtonProps>`
       cursor: auto;
     }
   `}
+  
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      color: transparent !important;
 
-  &:hover,
-	&:focus {
-    ${({ variant }) =>
-      (variant === "primary" &&
-        `
-      background-color: #ffffff;
-      color: #4643c6;
-      border: 2px solid #4643c6;
-    `) ||
-      (variant === "secondary" &&
-        `
-    background-color: #4643c6;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    `)};
-  }
-
-  transition: all 500ms;
+      img {
+        display: block;
+        position: absolute;
+        top: 24%;
+        left: 42%;
+        animation: ${gira} 2s linear infinite;
+      }
+    `}
 `;

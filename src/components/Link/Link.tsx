@@ -2,8 +2,13 @@ import React from "react";
 import { LinkStyled } from "./styled";
 
 export const Link = () => {
-
-    return (
-        <LinkStyled href="https://instagram.com/nicoferca" target={"_blank"}>Cadastrar</LinkStyled>
-    );
-}
+  return (
+    <LinkStyled
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://instagram.com/nicoferca"
+    >
+      Cadastrar
+    </LinkStyled>
+  );
+};
