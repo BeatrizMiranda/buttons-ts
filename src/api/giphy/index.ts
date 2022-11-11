@@ -1,8 +1,18 @@
 import axios from "..";
 
-const getGifs = async () => {
-    const response = await axios.get('gifs/trending/', {params: {limit: 50, api_key: process.env.REACT_APP_GIPHY_KEY} })
+// export type TGif = {
+//     id: string;
+//     title: string;
+//     images: {
+//       fixed_height: {
+//         url: string;
+//       };
+//     };
+//   };
+  
 
-    console.log(response);
+export const getGifs = async () => {
+    const response = await axios.get('gifs/trending', {params: {limit: 10, api_key: process.env.REACT_APP_GIPHY_KEY} })
+
     return response.data
 }
