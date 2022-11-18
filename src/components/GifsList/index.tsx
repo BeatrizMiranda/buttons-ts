@@ -1,25 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback, memo } from "react"
 import { getGifs } from "../../api/giphy"
+import { TGif } from "../../api/giphy/types"
 
 const GifList = () => {
+    const [gifs, setGifs] = useState<TGif[]>()
+    
+    const getGifsList = useCallback(async () => {
+      const response = await getGifs()
+      setGifs(response.data)
+    }, [])
 
-    const [gifs, setGifs] = useState([])
     console.log(gifs)
-    const getGifsList = async () => {
-        const response = await getGifs()
-        setGifs(response.data)
-    }
 
     useEffect(() => {
-      getGifsList()
-    }, [])
+      getGifsList()  
+    }, [getGifsList])
     
+  if (!gifs) return <div>Carregando...</div>
+  
   return (
     <div>
         <h1>GifList</h1>
-        {gifs.map((gif) => <img src={gif.images.fixed_height} />)}
+        {gifs.map((gif) => <img src={gif.images.fixed_height.url} alt={gif.title} key={gif.id} />)}
     </div>
   )
 }
 
-export default GifList
+export default memo(GifList)
